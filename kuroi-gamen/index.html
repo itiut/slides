@@ -21,6 +21,7 @@
       .remark-slide-content h2 { font-size: 2em; }
       .remark-slide-content h3 { font-size: 1.6em; }
       .footnote {
+        font-size: 0.8em;
         position: absolute;
         bottom: 3em;
       }
@@ -139,6 +140,46 @@ class: center, middle, inverse
 * `tmux`
 
 * `.ssh/config`
+
+---
+
+# Movements in Bash
+
+Emacsとほぼ同じ
+
+* `Ctrl-b`: 1文字戻る←
+
+* `Ctrl-f`: 1文字進む→
+
+* `Ctrl-a`: 行初に移動←←
+
+* `Ctrl-e`: 行末に移動→→
+
+* `Ctrl-m`, `Ctrl-j`: Enter
+
+* `Ctrl-h`: Backspace
+
+---
+
+# History in Bash
+
+* `Ctrl-p`: ヒストリを戻る↑
+
+* `Ctrl-n`: ヒストリを進む↓
+
+* `Ctrl-r`: ヒストリを古い方へ検索
+
+* `Ctrl-s`: ヒストリを新しい方へ検索
+
+
+`Ctrl-s`のシェルの出力を止める機能[1]を無効にしておく必要がある。
+
+```console
+$ stty stop undef
+```
+
+.footnote[ [1]止まった場合は`Ctrl-q`で解除できる ]
+
 
     </textarea>
     <script src="http://gnab.github.com/remark/downloads/remark-0.6.5.min.js"></script>
