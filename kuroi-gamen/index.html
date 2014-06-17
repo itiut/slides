@@ -180,8 +180,129 @@ Emacsとほぼ同じ
 $ stty stop undef
 ```
 
-.footnote[ [1]止まった場合は`Ctrl-q`で解除できる ]
+.footnote[ [1] 止まった場合は`Ctrl-q`で解除できる ]
 
+---
+
+# Redirect
+
+標準出力・標準エラーを画面(tty)以外のファイルなどに変更する
+
+標準出力
+```console
+$ whatis emacs > emacs_stdout.txt
+$ cat emacs_stdout.txt
+emacs (1)            - GNU project Emacs
+```
+
+標準エラー
+```console
+$ whatis zsh 2> zsh_stderr.txt
+$ cat zsh_stderr.txt
+zsh: nothing appropriate.
+```
+
+出力・エラーのリダイレクト先が同じ
+```console
+$ python -m SimpleHTTPServer > /dev/null 2>&1
+
+$ python -m SimpleHTTPServer &> /dev/null
+```
+
+---
+
+# Pipe
+
+コマンドの標準出力を別のコマンドの標準入力とする
+
+```console
+$ history | awk '{print $2}' | sort | uniq -c | sort -nr | head                                                                                                                        ⌚ 11:32:31
+    583 g
+    519 sudo
+    501 c
+    470 v
+    349 t
+    251 man
+    241 ssh
+    200 rm
+    146 cat
+    133 brew
+```
+
+---
+
+# Run background jobs
+
+コマンドの末尾に`&`をつけて実行する
+
+```console
+$ cat /dev/zero > /dev/null &
+```
+
+もしくはコマンドを実行してから`C-z`(suspend)して`bg`する
+
+```console
+$ cat /dev/zero > /dev/null
+^Z
+[1]+  Stopped                 cat /dev/zero > /dev/null
+$ bg
+[1]+ cat /dev/zero > /dev/null &
+$ jobs
+[1]+  Running                 cat /dev/zero > /dev/null &
+$ kill %1
+$ jobs
+[1]+  Terminated              cat /dev/zero > /dev/null
+```
+
+`fg`でバックグラウンドジョブをフォアグラウンドに持ってこれる
+
+---
+
+# `~/.bashrc`
+
+```shell
+# language
+LANG=en_US.UTF-8
+
+# history
+shopt -s histappend
+HISTCONTROL=ignoreboth
+HISTSIZE=10000
+HISTFILESIZE=10000
+
+# prompt
+PS1="\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ "
+
+# aliases
+alias cp="cp -i"
+alias mv="mv -i"
+alias rm="rm -i"
+
+# prevent tty from stopping
+stty stop undef
+```
+
+---
+
+# `~/.bash_profile`
+
+```sh
+if [ -n $BASH_VERSION ]; then
+    if [ -f $HOME/.bashrc ]; then
+        . $HOME/.bashrc
+    fi
+fi
+```
+
+基本的には
+
+* `~/.bash_profile` ログイン時のシェルで1度だけ読み込まれる[2]
+
+* `~/.bashrc` インタラクティブシェルごとに読み込まれる
+
+`ssh`したとき`~/.bashrc`が読み込まれていない場合は、 `~/.bash_profile`中で読み込むといいと思う
+
+.footnote[ [2] Ubuntu Desktopでは`~/.bash_profile`ではなく`~/.profile`を読み込む ]
 
     </textarea>
     <script src="http://gnab.github.com/remark/downloads/remark-0.6.5.min.js"></script>
