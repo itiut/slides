@@ -306,6 +306,119 @@ fi
 
 .footnote[ [2] Ubuntu Desktopでは`~/.bash_profile`ではなく`~/.profile`を読み込む ]
 
+---
+
+# Tmux
+
+**T**erminal **MU**ltiple**X**er の略?
+
+ターミナルを多重化してくれる
+
+### 機能
+
+* 画面分割 (pane)
+
+* タブっぽいもの (window)
+
+* detach/attachで作業環境を保持
+
+* **`ssh`が切れても進捗が無に帰らない**
+
+---
+
+# Install tmux
+
+`apt-get`とか`brew`とか`yum`とかでインストールできる
+
+### CentOS 5 x64 で`yum`に`tmux`がない場合
+
+```sh
+$ wget http://pkgs.repoforge.org/tmux/tmux-1.6-1.el5.rf.x86_64.rpm
+$ sudo rpm -Uvh tmux-1.6-1.el5.rf.x86_64.rpm
+```
+
+---
+
+## `~/.tmux.conf`
+
+[https://github.com/itiut/dotfiles-remote/raw/master/.tmux.conf](https://github.com/itiut/dotfiles-remote/raw/master/.tmux.conf)
+
+### 主な設定
+
+```sh
+# prefix key
+unbind-key C-b
+set-option -g prefix C-q
+bind-key C-q send-prefix
+
+# split pane
+bind-key | split-window -h
+bind-key - split-window -v
+
+# vi-like key bindings in copy mode
+set-window-option -g mode-keys vi
+bind-key -t vi-copy v begin-selection
+bind-key -t vi-copy y copy-selection
+```
+
+---
+
+# Keybindings in tmux
+
+* `Ctrl-q`: プレフィックス [3]
+* `C-q |`: ペインを縦分割
+* `C-q -`: ペインを横分割
+* `C-q c`: 新しいウィンドウを作成
+* `C-q !`: 現在のペインを新たなウィンドウに
+* `C-q d`: デタッチ
+
+
+* `Shift-arrow`: ペインの移動
+* `Alt-arrow`: ウィンドウの移動
+
+### 起動
+
+```console
+$ tmux
+$ tmux a                # アタッチ
+```
+
+.footnote[ [3] デフォルトは`C-b`だが1文字戻るのとかぶる ]
+
+---
+
+# Copy and paste
+
+* `C-q [`: コピーモード
+
+  * `Space`, `v`: 選択開始
+
+  * `Enter`, `y`: コピー
+
+* `C-q ]`: ペースト
+
+
+### クリップボードと連携 (ローカル, 1.8~)
+
+`~/.tmux.conf`
+
+```sh
+unbind-key -t vi-copy Enter
+bind-key -t vi-copy Enter copy-pipe "xclip -in -selection clipboard"
+```
+
+---
+
+# Byobu
+
+tmux, screenのラッパー
+
+デフォルトでいろいろ設定されている
+
+`F9`でヘルプ
+
+設定ファイルは`~/.byobu/profile.tmux`など
+
     </textarea>
     <script src="http://gnab.github.com/remark/downloads/remark-0.6.5.min.js"></script>
     <script>
