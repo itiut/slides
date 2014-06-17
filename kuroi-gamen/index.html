@@ -141,7 +141,7 @@ class: center, middle, inverse
 
 * `tmux`
 
-* `.ssh/config`
+* `~/.ssh/config`
 
 ---
 
@@ -189,6 +189,7 @@ $ stty stop undef
 標準出力・標準エラーを画面(tty)以外のファイルなどに変更する
 
 標準出力
+
 ```console
 $ whatis emacs > emacs_stdout.txt
 $ cat emacs_stdout.txt
@@ -196,6 +197,7 @@ emacs (1)            - GNU project Emacs
 ```
 
 標準エラー
+
 ```console
 $ whatis zsh 2> zsh_stderr.txt
 $ cat zsh_stderr.txt
@@ -203,9 +205,9 @@ zsh: nothing appropriate.
 ```
 
 出力・エラーのリダイレクト先が同じ
+
 ```console
 $ python -m SimpleHTTPServer > /dev/null 2>&1
-
 $ python -m SimpleHTTPServer &> /dev/null
 ```
 
@@ -216,7 +218,7 @@ $ python -m SimpleHTTPServer &> /dev/null
 コマンドの標準出力を別のコマンドの標準入力とする
 
 ```console
-$ history | awk '{print $2}' | sort | uniq -c | sort -nr | head                                                                                                                        ⌚ 11:32:31
+$ history | awk '{print $2}' | sort | uniq -c | sort -nr | head
     583 g
     519 sudo
     501 c
