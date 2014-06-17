@@ -419,6 +419,53 @@ tmux, screenのラッパー
 
 設定ファイルは`~/.byobu/profile.tmux`など
 
+---
+
+## `~/.ssh/config`
+
+```sh
+Host yebis
+    HostName yebis.tkl.iis.u-tokyo.ac.jp
+    User tanikawa
+```
+
+これを
+
+```console
+$ ssh tanikawa@yebis.tkl.iis.u-tokyo.ac.jp
+```
+
+こうできる
+
+```console
+$ ssh yebis
+```
+
+---
+
+# Multi-hop ssh
+
+`~/.ssh/config`
+
+```sh
+Host yebis
+    HostName yebis.tkl.iis.u-tokyo.ac.jp
+    User tanikawa
+
+Host kugenuma51
+    HostName 192.168.126.151
+    User tanikawa
+    ProxyCommand ssh yebis -W %h:%p
+```
+
+```console
+$ ssh kugenuma51
+Last login: Tue Jun 17 11:13:51 2014 from yebis
+tanikawa@kugenuma51:~$
+```
+
+公開鍵認証の場合は全ての接続先に公開鍵を登録しておく必要がある
+
     </textarea>
     <script src="http://gnab.github.com/remark/downloads/remark-0.6.5.min.js"></script>
     <script>
