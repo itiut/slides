@@ -241,7 +241,7 @@ $ history | awk '{print $2}' | sort | uniq -c | sort -nr | head
 $ cat /dev/zero > /dev/null &
 ```
 
-もしくはコマンドを実行してから`C-z` (suspend) して`bg`する
+もしくはコマンドを実行してから`Ctrl-z` (suspend) して`bg`する
 
 ```console
 $ cat /dev/zero > /dev/null
@@ -366,11 +366,11 @@ bind-key -t vi-copy y copy-selection
 # Keybindings in tmux
 
 * `Ctrl-q`: プレフィックス [3]
-* `C-q |`: ペインを縦分割
-* `C-q -`: ペインを横分割
-* `C-q c`: 新しいウィンドウを作成
-* `C-q !`: 現在のペインを新たなウィンドウに
-* `C-q d`: デタッチ
+* `Ctrl-q |`: ペインを縦分割
+* `Ctrl-q -`: ペインを横分割
+* `Ctrl-q c`: 新しいウィンドウを作成
+* `Ctrl-q !`: 現在のペインを新たなウィンドウに
+* `Ctrl-q d`: デタッチ
 
 
 * `Shift-arrow`: ペインの移動
@@ -383,19 +383,19 @@ $ tmux
 $ tmux a                # アタッチ
 ```
 
-.footnote[ [3] デフォルトは`C-b`だが1文字戻るのとかぶる ]
+.footnote[ [3] デフォルトは`Ctrl-b`だが1文字戻るのとかぶる ]
 
 ---
 
 # Copy and paste
 
-* `C-q [`: コピーモード
+* `Ctrl-q [`: コピーモード
 
   * `Space`, `v`: 選択開始
 
   * `Enter`, `y`: コピー
 
-* `C-q ]`: ペースト
+* `Ctrl-q ]`: ペースト
 
 
 ### クリップボードと連携 (ローカル, 1.8~)
